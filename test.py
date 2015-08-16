@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from Skype4Py import *
+from skype4py.Skype4Py import *
 import time
 import re
 
