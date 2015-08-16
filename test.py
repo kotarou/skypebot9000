@@ -33,7 +33,7 @@ class SkypeBot(object):
     def cmd_userstatus(self, msg, status):
         if status:
             try:
-                self.skype.ChangeUserStatus(status)
+                self.skype.CurrentUserStatus = status
             except SkypeError, e:
                 return str(e)
         return 'Current status: %s' % self.skype.CurrentUserStatus
