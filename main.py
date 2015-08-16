@@ -4,6 +4,7 @@ from skype4py.Skype4Py import *
 import time
 import re
 
+authNames = ["aronyan1337"]
 
 class SkypeBot(object):
 
@@ -31,6 +32,8 @@ class SkypeBot(object):
                         break
 
     def cmd_userstatus(self, msg, status):
+        if msg.Sender.Handle not in authNames:
+            return "I'm afraid I can't let you do that, " + msg.FromDisplayName
         if status:
             try:
                 self.skype.CurrentUserStatus = status
@@ -38,8 +41,8 @@ class SkypeBot(object):
                 return str(e)
         return 'Current status: %s' % self.skype.CurrentUserStatus
 
-    def cmd_credit(self, msg):
-        return self.skype.CurrentUserProfile.BalanceToText
+    # def cmd_credit(self, msg):
+    #     return self.skype.CurrentUserProfile.BalanceToText
 
     def cmd_9gag(self, msg):
         s = msg.Sender
@@ -56,7 +59,7 @@ class SkypeBot(object):
 
     commands = {
         "@userstatus *(.*)": cmd_userstatus,
-        "credit": cmd_credit,
+        #"credit": cmd_credit,
         "9gag.com": cmd_9gag
     }
 
