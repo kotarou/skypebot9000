@@ -41,16 +41,17 @@ class SkypeBot(object):
 
     def MessageStatus(self, msg, status):
         if status == cmsReceived:
+            print(msg.Chat.Name, msg.Body)
             if settings.CHAT_RESTRCT_TYPE == CHAT_RESTRICT_WHITELIST and msg.Chat.Name not in settings.CHAT_WHITELIST:
                 return
             if settings.CHAT_RESTRCT_TYPE == CHAT_RESTRICT_BLACKLIST and msg.Chat.Name in settings.CHAT_BLACKLIST:
                 return
-            if self.os == OS_WIN:
-                allowed = msg.Chat.Type in settings.ALLOWED_CHAT_TYPES
-            else:
-                # TODO work out how to get chat types in nix
-                allowed = True
-            if allowed:
+            # if self.os == OS_WIN:
+            #     allowed = msg.Chat.Type in settings.ALLOWED_CHAT_TYPES
+            # else:
+            #     # TODO work out how to get chat types in nix
+            #     allowed = True
+            if True:
                 for module_ in self.lModules.values():
                     for trigger in module_.triggers:
                         match = re.search(trigger, msg.Body, re.IGNORECASE)
