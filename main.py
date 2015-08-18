@@ -5,11 +5,18 @@ import time
 import re
 import modules
 import settings
+import sys
 from enums import *
 
 class SkypeBot(object):
 
     def __init__(self):
+        if sys.platform == "linux2":
+            self.skype = Skype(Transport='x11')
+        else:
+            # Windows
+            self.skype = Skype()
+
         self.skype = Skype(Events=self)
         print("Skype added!")
         #self.skype.FriendlyName = "Skype Bot"
