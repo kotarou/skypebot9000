@@ -7,7 +7,7 @@ triggers = ["9gag.com", "^honk"]
 
 def changeRole(chat, user, role):
     if role == chatMemberRoleListener:
-        chat.SendMessage(user.Handle + " just got muted for being bad.")
+        chat.SendMessage(user.Handle + " just got muted for 20s for being bad.")
     user.Role = role
 
 def main(args):
@@ -19,7 +19,7 @@ def main(args):
             if user_.CanSetRoleTo(chatMemberRoleListener):
                 oldRole = user_.Role
                 changeRole(args['msg'].Chat, user_, chatMemberRoleListener)
-                threading.Timer(10, changeRole, [args['msg'].Chat, user_, oldRole]).start()
+                threading.Timer(20, changeRole, [args['msg'].Chat, user_, oldRole]).start()
             else:
                 args['msg'].Chat.SendMessage(args['msg'].FromDisplayName + " has too much power to be muted, but is still a shitlord.")
             break
