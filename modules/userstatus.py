@@ -1,10 +1,10 @@
 import sys
 import settings
 
-triggers = ["^!credits"]
+triggers = ["^!stuff"]
 
 def main(args):
-    args['msg'].Chat.SendMessage("Skypebot written by kotarou")
+    args['msg'].Chat.SendMessage("This is a test")
 
 if __name__ == '__main__':
     raise Exception("You cannot run a module from command line")

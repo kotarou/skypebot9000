@@ -18,9 +18,12 @@ class SkypeBot(object):
         # Load the modules
         modules.loadModules()
         self.lModules = modules.modules
-        print(self.lModules['credits'])
         # print(modules.modules['credits'].module.main([]))
         # print(modules.modules)
+
+    def reloadModules(self):
+        modules.loadModules()
+        self.lModules = modules.modules
 
     def AttachmentStatus(self, status):
         if status == apiAttachAvailable:
@@ -34,7 +37,7 @@ class SkypeBot(object):
                 for module_ in self.lModules.values():
                     for trigger in module_.triggers:
                         match = re.search(trigger, msg.Body, re.IGNORECASE)
-                        args = {'msg': msg, 'skype': skype}
+                        args = {'msg': msg, 'skype': skype, 'main': self}
                         if match:
                             msg.MarkAsSeen()
                             module_.run(args)
@@ -61,24 +64,24 @@ class SkypeBot(object):
     # def cmd_credit(self, msg):
     #     return self.skype.CurrentUserProfile.BalanceToText
 
-    def cmd_9gag(self, msg):
-        s = msg.Sender
-        c = msg.Chat
-        mo = c.MemberObjects
-        for user_ in mo:
-            if user_.Handle == s.Handle:
-                if user_.CanSetRoleTo(chatMemberRoleListener):
-                    user_.Role = chatMemberRoleListener
-                    return msg.FromDisplayName + " just got muted for being bad."
-                else:
-                    return msg.FromDisplayName + " has too much power to be muted, but is still a shitlord."
-        return "hi"
+    # def cmd_9gag(self, msg):
+    #     s = msg.Sender
+    #     c = msg.Chat
+    #     mo = c.MemberObjects
+    #     for user_ in mo:
+    #         if user_.Handle == s.Handle:
+    #             if user_.CanSetRoleTo(chatMemberRoleListener):
+    #                 user_.Role = chatMemberRoleListener
+    #                 return msg.FromDisplayName + " just got muted for being bad."
+    #             else:
+    #                 return msg.FromDisplayName + " has too much power to be muted, but is still a shitlord."
+    #     return "hi"
 
-    commands = {
-        "@userstatus *(.*)": cmd_userstatus,
-        #"credit": cmd_credit,
-        "9gag.com": cmd_9gag
-    }
+    # commands = {
+    #     "@userstatus *(.*)": cmd_userstatus,
+    #     #"credit": cmd_credit,
+    #     "9gag.com": cmd_9gag
+    # }
 
 if __name__ == "__main__":
     bot = SkypeBot()

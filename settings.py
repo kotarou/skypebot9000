@@ -4,7 +4,7 @@ from skype4py.Skype4Py.enums import *
 MODULE_PATHS = ["modules"]
 
 # Admins are the only ones allowed to issue sensitive commands to the bot
-ADMINS = ["aronyan1337"]
+ADMINS = ["aronyan1337", "offenderninethousand"]
 
 # Don't change under here unless you really know what you are doing
 ALLOWED_CHAT_TYPES = [chatTypeDialog, chatTypeLegacyDialog, chatTypeMultiChat]
