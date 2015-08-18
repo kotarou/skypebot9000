@@ -13,7 +13,7 @@ CHAT_RESTRCT_TYPE = CHAT_RESTRICT_WHITELIST
 # Chats that we will not react to
 CHAT_BLACKLIST = []
 # Chats that we will react to
-CHAT_WHITELIST = ["#offenderninethousand/$aronyan1337;5dde4b02b1eec1d5"]
+CHAT_WHITELIST = ["#offenderninethousand/$aronyan1337;5dde4b02b1eec1d5", "name=#sam.burns.wellington/$182ccd28efea1693"]
 
 # Don't change under here unless you really know what you are doing
 ALLOWED_CHAT_TYPES = [chatTypeDialog, chatTypeLegacyDialog, chatTypeMultiChat]
