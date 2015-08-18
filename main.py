@@ -3,6 +3,8 @@
 from skype4py.Skype4Py import *
 import time
 import re
+import modules
+import settings
 
 authNames = ["aronyan1337"]
 
@@ -10,8 +12,12 @@ class SkypeBot(object):
 
     def __init__(self):
         self.skype = Skype(Events=self)
-        self.skype.FriendlyName = "Skype Bot"
+        #self.skype.FriendlyName = "Skype Bot"
         self.skype.Attach()
+
+        # Load the modules
+        modules.loadModules()
+        print(modules.modules)
 
     def AttachmentStatus(self, status):
         if status == apiAttachAvailable:
@@ -21,7 +27,7 @@ class SkypeBot(object):
         print(status)
         if status == cmsReceived:
             print(msg.Chat.Type)
-            if msg.Chat.Type in (chatTypeDialog, chatTypeLegacyDialog, chatTypeMultiChat):
+            if msg.Chat.Type in settings.ALLOWED_CHAT_TYPES:
                 for regexp, target in self.commands.items():
                     match = re.search(regexp, msg.Body, re.IGNORECASE)
                     if match:
