@@ -17,7 +17,10 @@ class SkypeBot(object):
 
         # Load the modules
         modules.loadModules()
-        print(modules.modules)
+        self.lModules = modules.modules
+        print(self.lModules['credits'])
+        # print(modules.modules['credits'].module.main([]))
+        # print(modules.modules)
 
     def AttachmentStatus(self, status):
         if status == apiAttachAvailable:
@@ -28,14 +31,22 @@ class SkypeBot(object):
         if status == cmsReceived:
             print(msg.Chat.Type)
             if msg.Chat.Type in settings.ALLOWED_CHAT_TYPES:
-                for regexp, target in self.commands.items():
-                    match = re.search(regexp, msg.Body, re.IGNORECASE)
-                    if match:
-                        msg.MarkAsSeen()
-                        reply = target(self, msg, *match.groups())
-                        if reply:
-                            msg.Chat.SendMessage(reply)
-                        break
+                for module_ in self.lModules.values():
+                    for trigger in module_.triggers:
+                        match = re.search(trigger, msg.Body, re.IGNORECASE)
+                        args = {'msg': msg, 'skype': skype}
+                        if match:
+                            msg.MarkAsSeen()
+                            module_.run(args)
+                            break
+            #     for regexp, target in self.commands.items():
+            #         match = re.search(regexp, msg.Body, re.IGNORECASE)
+            #         if match:
+            #             msg.MarkAsSeen()
+            #             reply = target(self, msg, *match.groups())
+            #             if reply:
+            #                 msg.Chat.SendMessage(reply)
+            #             break
 
     def cmd_userstatus(self, msg, status):
         if msg.Sender.Handle not in authNames:

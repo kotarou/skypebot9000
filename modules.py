@@ -6,7 +6,6 @@ import imp
 import settings
 
 modules = {}
-MODULE_PATHS = settings.modules
 
 class Module:
 
@@ -15,6 +14,8 @@ class Module:
         self.skype = skype
         self.path = path
         self.name = name
+        self.module = imp.load_source(self.name, self.path)
+        self.triggers = self.module.triggers
 
     @staticmethod
     def isValid(path):
@@ -24,20 +25,17 @@ class Module:
         """
         return path.endswith(".py")
 
-    @property
-    def rTrigger(self):
-        pass
-
-    def init(self, skype):
-        """
-        (Re)load Python code and get access to exported class instance.
-        Bound stateful handler to a Skype instance.
-        """
-        # http://docs.python.org/2/library/imp.html#imp.load_module
-        module = imp.load_source(self.name, self.path)
-        self.handler = module.sevabot_handler
-
-        self.handler.init(skype)
+    def run(self, arg):
+        self.module.main(arg)
+    # def init(self, skype):
+    #     """
+    #     (Re)load Python code and get access to exported class instance.
+    #     Bound stateful handler to a Skype instance.
+    #     """
+    #     # http://docs.python.org/2/library/imp.html#imp.load_module
+    #     self.module = imp.load_source(self.name, self.path)
+    #     #self.handler = module.sevabot_handler
+    #     #self.handler.init(skype)
 
 
 def loadModules():
@@ -47,7 +45,7 @@ def loadModules():
 
     unloadModules()
 
-    for folder in MODULE_PATHS:
+    for folder in settings.MODULE_PATHS:
         folder = os.path.abspath(folder)
         for f in os.listdir(folder):
             fpath = os.path.join(folder, f)
@@ -60,7 +58,7 @@ def loadModules():
                 modules[body] = module
 
     if not len(modules.keys()):
-        raise RuntimeError("No modules found in: %s" % MODULE_PATHS)
+        raise RuntimeError("No modules found in: %s" % settings.MODULE_PATHS)
 
     return modules.keys()
 

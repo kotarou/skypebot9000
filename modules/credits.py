@@ -1,8 +1,11 @@
 import sys
 import settings
 
+triggers = ["^!credits"]
+
 def main(args):
-    print("hi")
+    args['msg'].Chat.SendMessage("Skypebot written by kotarou")
+
 
 if __name__ == '__main__':
-    main(sys.argv)
+    raise Exception("You cannot run a module from command line")
