@@ -37,7 +37,7 @@ class SkypeBot(object):
                 for module_ in self.lModules.values():
                     for trigger in module_.triggers:
                         match = re.search(trigger, msg.Body, re.IGNORECASE)
-                        args = {'msg': msg, 'skype': skype, 'main': self}
+                        args = {'msg': msg, 'skype': self.skype, 'main': self}
                         if match:
                             msg.MarkAsSeen()
                             module_.run(args)
@@ -50,16 +50,6 @@ class SkypeBot(object):
             #             if reply:
             #                 msg.Chat.SendMessage(reply)
             #             break
-
-    def cmd_userstatus(self, msg, status):
-        if msg.Sender.Handle not in authNames:
-            return "I'm afraid I can't let you do that, " + msg.FromDisplayName
-        if status:
-            try:
-                self.skype.CurrentUserStatus = status
-            except SkypeError, e:
-                return str(e)
-        return 'Current status: %s' % self.skype.CurrentUserStatus
 
     # def cmd_credit(self, msg):
     #     return self.skype.CurrentUserProfile.BalanceToText
