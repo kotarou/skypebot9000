@@ -4,7 +4,6 @@ import settings
 triggers = ["^!userstatus"]
 
 def main(args):
-    args['msg'].Chat.SendMessage("This is a test 3")
     if args['msg'].Sender.Handle not in settings.ADMINS:
         args['msg'].Chat.SendMessage("I'm afraid I can't let you do that, " + args['msg'].FromDisplayName)
     else:

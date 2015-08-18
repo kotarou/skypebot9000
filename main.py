@@ -58,18 +58,7 @@ class SkypeBot(object):
     # def cmd_credit(self, msg):
     #     return self.skype.CurrentUserProfile.BalanceToText
 
-    # def cmd_9gag(self, msg):
-    #     s = msg.Sender
-    #     c = msg.Chat
-    #     mo = c.MemberObjects
-    #     for user_ in mo:
-    #         if user_.Handle == s.Handle:
-    #             if user_.CanSetRoleTo(chatMemberRoleListener):
-    #                 user_.Role = chatMemberRoleListener
-    #                 return msg.FromDisplayName + " just got muted for being bad."
-    #             else:
-    #                 return msg.FromDisplayName + " has too much power to be muted, but is still a shitlord."
-    #     return "hi"
+
 
     # commands = {
     #     "@userstatus *(.*)": cmd_userstatus,
