@@ -13,8 +13,10 @@ class SkypeBot(object):
     def __init__(self):
         if sys.platform == "linux2":
             self.skype = Skype(Transport='x11')
+            self.os = OS_NIX
         else:
             # Windows
+            self.os = OS_WIN
             self.skype = Skype()
 
         self.skype = Skype(Events=self)
@@ -43,8 +45,12 @@ class SkypeBot(object):
                 return
             if settings.CHAT_RESTRCT_TYPE == CHAT_RESTRICT_BLACKLIST and msg.Chat.Name in settings.CHAT_BLACKLIST:
                 return
-            print(msg.Chat.Type)
-            if msg.Chat.Type in settings.ALLOWED_CHAT_TYPES:
+            if self.os == OS_WIN:
+                allowed = msg.Chat.Type in settings.ALLOWED_CHAT_TYPES
+            else:
+                # TODO work out how to get chat types in nix
+                allowed = True
+            if allowed:
                 for module_ in self.lModules.values():
                     for trigger in module_.triggers:
                         match = re.search(trigger, msg.Body, re.IGNORECASE)

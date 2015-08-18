@@ -16,4 +16,5 @@ CHAT_BLACKLIST = []
 CHAT_WHITELIST = ["#offenderninethousand/$aronyan1337;5dde4b02b1eec1d5", "name=#sam.burns.wellington/$182ccd28efea1693"]
 
 # Don't change under here unless you really know what you are doing
+# this doesn't work on *nix
 ALLOWED_CHAT_TYPES = [chatTypeDialog, chatTypeLegacyDialog, chatTypeMultiChat]
