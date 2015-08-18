@@ -5,6 +5,7 @@ import time
 import re
 import modules
 import settings
+from enums import *
 
 authNames = ["aronyan1337"]
 
@@ -30,8 +31,11 @@ class SkypeBot(object):
             self.skype.Attach()
 
     def MessageStatus(self, msg, status):
-        print(status)
         if status == cmsReceived:
+            if settings.CHAT_RESTRCT_TYPE == CHAT_RESTRICT_WHITELIST and msg.Chat.Name not in settings.CHAT_WHITELIST:
+                return
+            if settings.CHAT_RESTRCT_TYPE == CHAT_RESTRICT_BLACKLIST and msg.Chat.Name in settings.CHAT_BLACKLIST:
+                return
             print(msg.Chat.Type)
             if msg.Chat.Type in settings.ALLOWED_CHAT_TYPES:
                 for module_ in self.lModules.values():
