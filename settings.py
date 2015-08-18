@@ -17,5 +17,3 @@ CHAT_WHITELIST = ["#offenderninethousand/$aronyan1337;5dde4b02b1eec1d5", "name=#
 
 # Don't change under here unless you really know what you are doing
 ALLOWED_CHAT_TYPES = [chatTypeDialog, chatTypeLegacyDialog, chatTypeMultiChat]
-
-

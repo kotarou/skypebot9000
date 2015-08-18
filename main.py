@@ -7,18 +7,18 @@ import modules
 import settings
 from enums import *
 
-authNames = ["aronyan1337"]
-
 class SkypeBot(object):
 
     def __init__(self):
         self.skype = Skype(Events=self)
+        print("Skype added!")
         #self.skype.FriendlyName = "Skype Bot"
         self.skype.Attach()
-
+        print("Skype attached!")
         # Load the modules
         modules.loadModules()
         self.lModules = modules.modules
+        print("modules loaded!")
         # print(modules.modules['credits'].module.main([]))
         # print(modules.modules)
 
