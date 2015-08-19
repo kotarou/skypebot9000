@@ -46,6 +46,7 @@ class SkypeBot(object):
                 return
             if settings.CHAT_RESTRCT_TYPE == CHAT_RESTRICT_BLACKLIST and msg.Chat.Name in settings.CHAT_BLACKLIST:
                 return
+            #TODO: Work out why this stopped stuff working
             # if self.os == OS_WIN:
             #     allowed = msg.Chat.Type in settings.ALLOWED_CHAT_TYPES
             # else:

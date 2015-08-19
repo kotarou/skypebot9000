@@ -8,7 +8,11 @@ def main(args):
         args['msg'].Chat.SendMessage("I'm afraid I can't let you do that, " + args['msg'].FromDisplayName)
     else:
         words = args['msg'].Body.split(" ")
-        newStatus = words[1]
+        if len(words) > 1:
+            newStatus = words[1]
+        else:
+            args['msg'].Chat.SendMessage("Current status: " + args['skype'].CurrentUserStatus)
+            return
         try:
             args['skype'].CurrentUserStatus = newStatus
         except Exception, e:
